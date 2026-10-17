@@ -2,9 +2,22 @@
 
 - **Application:** LLM document assistants
 - **Portfolio project:** 04 of 15
-- **Status:** Project brief defined. Dataset acquisition, ML, application and MLOps implementation have not started.
+- **Status:** Source-derived CSV data is committed. ML models, the application and MLOps remain to be implemented.
 
 Part of [Tomas Ferrer's DS/ML portfolio](https://tomasferrer.com/).
+
+## Committed CSV dataset
+
+**Dataset:** Stanford SQuAD 2.0
+
+**Coverage:** Complete public train and development releases, normalized into context and question/answer CSV tables. The hidden test set is not included.
+
+| CSV file | Rows |
+|---|---:|
+| [squad_contexts.csv](data/raw/squad_contexts.csv) | 20,239 |
+| [squad_questions.csv](data/raw/squad_questions.csv) | 142,192 |
+
+These are actual published observations or documented format conversions. See [source, license and limitations](data/DATASET.md) and [CSV schemas/checksums](data/csv-manifest.json).
 
 ## Project prompt
 
@@ -12,19 +25,17 @@ Build an end-to-end llm document assistants application that turns a published o
 
 ### Business question and application
 
-**Decision:** Can an operations analyst find a reliable, cited answer in a policy corpus quickly enough to use it?
+**Decision:** Can an analyst obtain a supported, cited answer from a published document corpus and recognize unanswerable questions?
 
-**Application to build:** Ask questions grounded in the published Doc2Dial document corpus; inspect cited passages and abstain when retrieved evidence is insufficient. Preserve the documents' original snapshot context.
+**Application to build:** Ask questions over SQuAD 2.0 passages; inspect cited evidence and abstain when the supplied context cannot support an answer. Preserve source article and split identifiers.
 
 Write a short project charter defining the user, current baseline, primary business KPI, guardrails, prediction time, and measurable success criteria before selecting a model. Explain which decision the model changes and the costs of incorrect decisions.
 
 ### Published dataset and raw data
 
-[Doc2Dial](https://doc2dial.github.io/data.html) published documents, dialogue turns and annotated grounding spans. Preserve the released splits and data-construction notes. Additional negative pairs or manually judged edge cases are derived annotations over the source corpus, not replacement raw data.
+The committed source is **Stanford SQuAD 2.0**. Complete public train and development releases, normalized into context and question/answer CSV tables. The hidden test set is not included. See [dataset documentation](data/DATASET.md) for original links, attribution, usage terms and limitations.
 
-**Additional source/access notes:** Use the published corpus and splits, pin the creator repository/release and inspect terms. Train a supporting-evidence classifier using annotated spans and documented negative sampling. Dialogue is constructed/crowdsourced, not production support logs
-
-Acquire a pinned source release into `data/raw/` and preserve the original bytes. Add a repeatable acquisition script and a manifest containing source URL, release/version, retrieval time, citation, terms, file sizes and SHA-256 checksums. Keep cleaned data in `data/interim/` and model-ready features/split assignments in `data/processed/`. Raw data stay out of Git unless redistribution is explicitly appropriate.
+Acquire a pinned source release into `data/raw/` and preserve the original bytes. Add a repeatable acquisition script and a manifest containing source URL, release/version, retrieval time, citation, terms, file sizes and SHA-256 checksums. Keep cleaned data in `data/interim/` and model-ready features/split assignments in `data/processed/`. Redistributable CSV exports and the documented supporting assets are committed; large source archives remain excluded from Git.
 
 Audit labels, decision-time feature availability, duplicates, missingness, class balance, and temporal/group structure. If the candidate cannot support the task or intended use, find another suitable published dataset or narrow the question. Generated fixtures and economic scenarios are supplementary, clearly labeled artifacts.
 
@@ -32,7 +43,7 @@ Audit labels, decision-time feature availability, duplicates, missingness, class
 
 **Required fitted component:** Trained supporting-evidence classifier plus pretrained retrieval/generation.
 
-Retrieval-augmented generation with pretrained embeddings/generation plus a task-specific supporting-evidence classifier trained on annotated spans and documented negative sampling. Compare keyword, embedding, and hybrid retrieval. Compare learned abstention with a fixed-threshold baseline using development data only.
+Retrieval-augmented generation with pretrained embeddings/generation plus a task-specific supporting-evidence classifier trained on published answer spans and unanswerable-question labels. Compare keyword, embedding, and hybrid retrieval. Compare learned abstention with a fixed-threshold baseline using development data only.
 
 Produce a reproducible training command and save the fitted preprocessing, model and decision policy together where appropriate. Compare the learned approach with a simple baseline. Pretrained models may support the solution, but a pretrained API call or prompt alone does not fulfill the trained-component requirement.
 
@@ -77,7 +88,7 @@ Use the smallest architecture that completes this lifecycle. Select real-time or
 
 ## Completion checklist
 
-- [ ] Published source acquired, checksum verified and provenance/profile recorded.
+- [x] Published source acquired, checksum verified and provenance/profile recorded.
 - [ ] Data audit, project charter, success criteria and evaluation protocol complete.
 - [ ] Baseline and trained ML component evaluated; artifacts and failure analysis saved.
 - [ ] Working application deployed with the exact evaluated model version.
@@ -86,4 +97,4 @@ Use the smallest architecture that completes this lifecycle. Select real-time or
 
 ## Current implementation
 
-This repository currently contains the implementation brief and Git exclusions. The dataset links identify starting sources; acquisition and model results will be documented as implementation proceeds.
+Published dataset observations, CSV exports, supporting assets where applicable, and provenance/checksum documentation are present. Models, application functionality and MLOps have not been implemented or evaluated yet.

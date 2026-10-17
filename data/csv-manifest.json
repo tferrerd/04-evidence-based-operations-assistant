@@ -1,0 +1,42 @@
+{
+  "dataset": "Stanford SQuAD 2.0",
+  "source_urls": [
+    "https://rajpurkar.github.io/SQuAD-explorer/",
+    "https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json",
+    "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json"
+  ],
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "selection": "Complete public train and development releases, normalized into context and question/answer CSV tables. The hidden test set is not included.",
+  "notes": "Attribution: Pranav Rajpurkar, Robin Jia, Percy Liang and the SQuAD/Wikipedia contributors. Replaces Doc2Dial to use an explicitly redistributable source. Paragraph IDs are derived keys; all question, passage and answer text and source split assignments are retained. answers_json preserves multiple answer spans. Impossible means unanswerable from its supplied paragraph, not necessarily unanswerable from the entire corpus. This is general document QA rather than a company policy corpus.",
+  "generated_at_utc": "2026-10-17T20:50:59.903130+00:00",
+  "files": [
+    {
+      "path": "data/raw/squad_contexts.csv",
+      "rows": 20239,
+      "columns": [
+        "context_id",
+        "source_split",
+        "article_title",
+        "context"
+      ],
+      "bytes": 15756598,
+      "sha256": "848c9d1b087c571a6be558bab0ea9e631cb47c88a4c8b8aae8aa3adb44802930"
+    },
+    {
+      "path": "data/raw/squad_questions.csv",
+      "rows": 142192,
+      "columns": [
+        "question_id",
+        "source_split",
+        "context_id",
+        "question",
+        "is_impossible",
+        "answers_json"
+      ],
+      "bytes": 21862129,
+      "sha256": "212cb5f065ab6717229376fe506d5ebe819f0efc9271bf3764b7f31ead2ad7e3"
+    }
+  ],
+  "assets": []
+}
